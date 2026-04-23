@@ -1,0 +1,19 @@
+# Failed Login Attempts
+index=ssh_logs event_type="Failed SSH Login"
+| stats count by id.orig_h
+
+# Multiple Failed Attempts
+index=ssh_logs event_type="Multiple Failed Authentication Attempts"
+| stats count by id.orig_h, id.resp_h
+
+# Successful Logins
+index=ssh_logs event_type="Successful SSH Login"
+| stats count by id.orig_h, id.resp_h
+
+# Unauthenticated Connections
+index=ssh_logs event_type="Connection Without Authentication"
+| stats count by id.orig_h
+
+# Timechart
+index=ssh_logs event_type="Connection Without Authentication"
+| timechart count by id.orig_h
